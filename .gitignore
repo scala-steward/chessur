@@ -6,4 +6,4 @@
 out
 gen
 **/target
-
+api.swagger.json

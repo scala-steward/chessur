@@ -50,18 +50,17 @@ addCommandAlias(
 )
 
 guardrailTasks in Compile := {
-  if (!file("target/api.swagger.json").exists()) {
+  val filePath = "./api.swagger.json"
+  if (!file(filePath).exists()) {
     url(
       "https://raw.githubusercontent.com/ory/hydra/master/docs/api.swagger.json"
-    ) #> file("target/api.swagger.json") !
+    ) #> file(filePath) !
   }
   List(
     ScalaClient(
-      file("target/api.swagger.json"),
+      file(filePath),
       pkg = "com.ukonnra.chessur",
       framework = "http4s",
-      tracing = true
     )
   )
 }
-unmanagedSourceDirectories in Compile += (sourceManaged in Compile).value
